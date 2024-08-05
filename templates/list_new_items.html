@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block title %}List New Items{% endblock %}
+{% block content %}
+
+<div class="container">
+  <h2 class="my-4">List New Items for Sale</h2>
+
+  <form action="{{ url_for('list_new_items') }}" method="post" enctype="multipart/form-data">
+    <!-- Contact information fields -->
+    <div class="form-group">
+      <label for="contact_name">Contact Name:</label>
+      <input type="text" class="form-control" id="contact_name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone_number">Phone Number:</label>
+      <input type="tel" class="form-control" id="phone_number" name="phone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address:</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Location:</label>
+      <input type="text" class="form-control" id="location" name="location" required>
+    </div>
+
+    <h3>Items</h3>
+
+    <div id="items-container">
+      {% for item in items %}
+        <div class="item-entry">
+          <div class="form-group">
+            <label for="item_name_{{ loop.index0 }}">Item Name:</label>
+            <input type="text" class="form-control" id="item_name_{{ loop.index0 }}" name="items[{{ loop.index0 }}][name]" value="{{ item.name }}" required>
+          </div>
+
+          <div class="form-group">
+            <label for="description_{{ loop.index0 }}">Description:</label>
+            <textarea class="form-control" id="description_{{ loop.index0 }}" name="items[{{ loop.index0 }}][description]" required>{{ item.description }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="price_{{ loop.index0 }}">Price:</label>
+            <input type="number" class="form-control" id="price_{{ loop.index0 }}" name="items[{{ loop.index0 }}][price]" step="0.01" value="{{ item.price }}" required>
+          </div>
+
+          <div class="form-group">
+            <label for="currency_{{ loop.index0 }}">Currency:</label>
+            <select class="form-control" id="currency_{{ loop.index0 }}" name="items[{{ loop.index0 }}][currency]">
+              <option value="UGX" {% if item.currency == 'UGX' %}selected{% endif %}>UGX</option>
+              <option value="USD" {% if item.currency == 'USD' %}selected{% endif %}>USD</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="availability_{{ loop.index0 }}">Availability:</label>
+            <input type="text" class="form-control" id="availability_{{ loop.index0 }}" name="items[{{ loop.index0 }}][availability]" value="{{ item.availability }}">
+          </div>
+
+          <div class="form-group">
+            <label for="image_{{ loop.index0 }}">Item Image:</label>
+            <input type="file" class="form-control-file" id="image_{{ loop.index0 }}" name="items[{{ loop.index0 }}][image]" accept="image/*">
+            <small class="form-text text-muted">Max file size: 500KB. Large images will be automatically resized.</small>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <button type="button" id="add-item" class="btn btn-secondary mt-3">Add Another Item</button>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">List Items</button>
+      <button type="button" id="export-PDF" class="btn btn-secondary" onclick="exportToPDF()">Export to PDF</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

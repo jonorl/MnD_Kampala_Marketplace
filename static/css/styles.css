@@ -1,0 +1,522 @@
+/* styles.css */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Quicksand';
+    font-size: 18px;
+    margin-left: 2%; /* reduce as needed */
+    margin-right: 2%; /* reduce as needed */
+}
+
+h1, h2 {
+    font-size: 30px;
+}
+
+main {
+    flex: 1;
+    max-width: 95%; /* or any percentage you prefer */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1500px; /* or any maximum width you want */
+    margin: 0 auto; /* centers the content */
+}
+
+.pagination{
+    padding: 10px;
+}
+
+.table.table-striped {
+    table-layout: auto;
+    width: 100%; /* increase from 100% */
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    margin: 0;
+    font-family: 'Quicksand';
+    font-size: 0.9em;
+    font-family: sans-serif;
+    /*min-width: 500px;*/
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table.table-striped thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    height: 30px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table.table-striped th {
+    white-space: nowrap;
+}
+
+.table.table-striped th,
+.table.table-striped td {
+    word-wrap: break-word;
+    padding: 12px 15px;
+    text-align: center;
+    width: auto;
+}
+
+.text-start, .text-center {
+    border-bottom: 1px solid #dddddd;
+}
+
+.text-start tbody tr:nth-of-type(even), .text-center tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+
+.text-start tbody tr:last-of-type, .text-center tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.table.table-striped th:nth-child(1),
+.table.table-striped td:nth-child(1) {
+    width: 10%; /* Price name */
+}
+
+.table.table-striped th:nth-child(2),
+.table.table-striped td:nth-child(2) {
+    width: 10%; /* Item name */
+}
+
+.table.table-striped th:nth-child(4),
+.table.table-striped td:nth-child(4) {
+    width: 10%; /* date */
+}
+
+.table.table-striped th:nth-child(5),
+.table.table-striped td:nth-child(5) {
+    width: 15%; /* description */
+}
+
+.table.table-striped th:nth-child(7),
+.table.table-striped td:nth-child(7) {
+    width: 10%; /* contact name */
+}
+
+.table.table-striped th:nth-child(8),
+.table.table-striped td:nth-child(8) {
+    width: 10%; /* phone */
+}
+
+.table.table-striped th:nth-child(9),
+.table.table-striped td:nth-child(9) {
+    width: 15%; /* email */
+}
+
+/* */
+
+.footer {
+    margin-top: auto;
+}
+
+/* Add your custom styles below */
+
+/* Example custom styles */
+.navbar-brand {
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+  }
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+#export-PDF.btn-secondary {
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+#export-PDF.btn-secondary:hover {
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-center {
+    display: block;
+    margin: 0 auto;
+}
+
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.narrow-input {
+    width: 200px !important; /* Adjust this value as needed */
+    margin: 0 auto;
+    display: block;
+}
+
+.login-form .form-control {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 10px;
+}
+
+.custom-form-control {
+    width: 15%;
+    max-width: 100%;
+    margin: 0 auto 10px;
+}
+
+.login-form .btn {
+    width: 100%;
+    max-width: 250px;
+}
+
+.login-form .form-inner {
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.register-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.narrow-input {
+    width: 200px !important; /* Adjust this value as needed */
+    margin: 0 auto;
+    display: block;
+}
+
+.register-form .form-control {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 10px;
+}
+
+.register-form .btn {
+    width: 100%;
+    max-width: 250px;
+}
+
+.register-form .form-inner {
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.button-container {
+    margin-top: 15px; /* Add desired spacing */
+  }
+
+  .thumbnail-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Image cell styles */
+.image-cell {
+    width: 80px; /* Adjust based on your needs */
+    padding: 5px !important;
+}
+
+.thumbnail-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail {
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+    transition: transform 0.2s ease-in-out;
+}
+
+.thumbnail:hover {
+    transform: scale(1.1);
+}
+
+
+/* Ensure the table doesn't cut off the expanded image */
+.table.table-striped {
+    overflow: visible;
+}
+
+/* Ensure the full image container doesn't overflow the viewport */
+.thumbnail-container:hover .full-image {
+    display: block;
+}
+
+/* Adjust positioning for images near the right edge of the screen */
+.thumbnail-container:hover .full-image {
+    left: auto;
+    right: 100%;
+}
+
+.sharemenu-button {
+    background: none;
+    border: 1px solid #C2C2C2;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sharemenu-button img {
+    width: 38px;
+    height: 38px;
+  }
+
+/* Add more custom styles as needed */
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .search-form {
+        margin-bottom: 20px;
+    }
+/* For mobile devices */
+@media (max-width: 1200px) {
+    .thumbnail-container:hover .full-image {
+        left: auto;
+        right: 100%;
+    }
+    }
+    .search-input {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .item-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .item-card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .thumbnail-container {
+        position: relative;
+        width: 100%;
+        max-width: 300px; /* Adjust as needed */
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+    .thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .thumbnail, .full-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .pagination-link {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+    }
+
+    .pagination-info {
+        margin: 0 10px;
+    }
+
+    .full-image {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+}
+
+}
+
+.strikethrough {
+    text-decoration: line-through;
+    text-decoration-color: red;
+    text-decoration-thickness: 2px;
+  }
+
+  .search-button, .clear-search-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px; /* Rounded edges */
+    color: #fff; /* White text color */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-button {
+    background-color: #009879; /* Search button color */
+}
+
+.clear-search-button {
+    background-color: #f8f9fa;  /* Example background color for clear search button */
+    color: #000; /* Text color for clear search button */
+    border: 1px solid #ced4da;  /* Border color for clear search button */
+    margin-top: 10px; /* Margin for spacing */
+}
+
+.search-button:hover, .clear-search-button:hover {
+    opacity: 0.9; /* Slight transparency on hover */
+}
+
+.search-button:focus, .clear-search-button:focus {
+    outline: none; /* Remove outline on focus */
+}
+
+.long-text {
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.long-text:hover {
+    overflow: visible;
+}
+
+.scrollable-container {
+    height: 100px; /* Fixed height for the row */
+    max-height: 100px; /* Ensures the height is fixed */
+    width: 300px; /* Fixed width for the column */
+    padding: 0; /* Remove padding to prevent expanding */
+    vertical-align: top; /* Align content to the top */
+}
+
+.scrollable-content {
+    height: 100%; /* Take full height of container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    /*padding: 10px;  Add some padding inside the scrollable area */
+    box-sizing: border-box; /* Include padding in the element's total width/height */
+}
+
+/* Style the scrollbar for webkit browsers */
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Ensure table cells don't expand */
+.table.table-striped td {
+    max-height: 100px; /* Match the height of scrollable-container */
+    overflow: hidden; /* Hide overflow */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* Card styling */
+.card {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #333333;
+}
+
+.card-subtitle {
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 0.9em;
+    color: #555555;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}

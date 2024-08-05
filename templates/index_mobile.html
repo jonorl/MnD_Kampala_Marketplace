@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+{% block title %}Item List Mobile{% endblock %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">List of Items</h2>
+
+    <form action="{{ url_for('index') }}" method="get" class="mobile-form">
+        <div class="form-group">
+            <input type="text" name="search" value="{{ search }}" placeholder="Search" class="custom-form-control">
+        </div>
+        <div class="form-group">
+            <input type="date" name="date" class="custom-form-control">
+        </div>
+        <div class="form-group">
+            <select id="username-dropdown" name="username" class="custom-form-control">
+                <option value="">Select a user</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if request.args.get('username') == str(user.id) %}selected{% endif %}>{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group checkbox-group">
+            <label for="exclude-sold">
+                <input type="checkbox" id="exclude-sold" name="exclude_sold" {% if request.args.get('exclude_sold') %}checked{% endif %}>
+                Exclude Sold Items
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="search-button">Search</button>
+        </div>
+    </form>
+    <div class="form-group">
+        <a href="{{ url_for('index') }}" class="clear-search-link">
+            <button type="button" class="clear-search-button">Clear Search</button>
+        </a>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if items.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=items.prev_num, search=search) }}">Previous</a>
+            </li>
+            {% endif %}
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ items.page }} of {{ items.pages }}</span>
+            </li>
+            {% if items.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=items.next_num, search=search) }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+    <div class="row">
+        {% for item in items %}
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ item.name }}</h3>
+                    <h4 class="card-subtitle mb-2 text-muted">{{ item.price | currency }} {{ item.currency }}</h4>
+                    <p class="card-text">
+                        <strong>Availability:</strong> {{ item.availability }}<br>
+                        <strong>Date Added:</strong> {{ item.created_at.strftime('%d-%m-%Y') }}<br>
+                        {{ item.description }}
+                    </p>
+
+                    {% if item.thumbnail_path %}
+                    <div class="card">
+                        <div class="card-body">
+                            {% if item.thumbnail_path %}
+                                <div class="image-container">
+                                    <a href="{{ item.image_path }}" target="_blank" class="thumbnail-link">
+                                        <img src="{{ item.thumbnail_path }}" alt="{{ item.name }}" class="thumbnail">
+                                    </a>
+                                    <img src="{{ item.image_path }}" alt="{{ item.name }}" class="full-image">
+                                </div>
+                            {% else %}
+                                <p class="text-center">No Image</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <p class="text-muted">No Image</p>
+                    {% endif %}
+
+                    <div class="mt-3">
+                        <h5>Contact Information</h5>
+                        <p>
+                            <strong>Name:</strong> {{ item.contact.name }}<br>
+                            <strong>Phone:</strong> {{ item.contact.phone }}<br>
+                            <strong>Email:</strong> {{ item.contact.email }}<br>
+                            <strong>Location:</strong> {{ item.contact.location }}
+                        </p>
+                    </div>
+
+                    <p class="card-text"><strong>Sold:</strong> {{ 'No' if item.sold == 0 else 'Yes' }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if items.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=items.prev_num, search=search) }}">Previous</a>
+            </li>
+            {% endif %}
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ items.page }} of {{ items.pages }}</span>
+            </li>
+            {% if items.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('index', page=items.next_num, search=search) }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

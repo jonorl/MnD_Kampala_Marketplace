@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Item List
+{% endblock %}
+
+{% block content %}
+<h1>List of Items</h1>
+
+<form action="{{ url_for('index') }}" method="get">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search" class="custom-form-control">
+    <input type="date" name="date" class="custom-form-control">
+    <select id="username-dropdown" name="username">
+        <option value="">Select a user</option>
+        {% for user in users %}
+            <option value="{{ user.id }}" {% if request.args.get('username') == str(user.id) %}selected{% endif %}>{{ user.username }}</option>
+        {% endfor %}
+    </select>
+    <label for="exclude-sold">
+        <input type="checkbox" id="exclude-sold" name="exclude_sold" {% if request.args.get('exclude_sold') %}checked{% endif %}>
+        Exclude Sold Items
+    </label>
+    <button type="submit" class="search-button">Search</button>
+</form>
+<a href="{{ url_for('index') }}">
+    <button type="button" class="clear-search-button">Clear Search</button>
+</a>
+
+<div class="pagination">
+    {% if items.has_prev %}
+    <a&nbsp;<a href="#"></a><a href="{{ url_for('index', page=items.prev_num, search=search) }}">Previous</a>
+    {% endif %}
+
+    Page {{ items.page }} of {{ items.pages }} &nbsp;<a href="#"></a>
+
+    {% if items.has_next %}
+    <a href="{{ url_for('index', page=items.next_num, search=search) }}">Next</a>
+    {% endif %}
+</div>
+
+<table id="item-table"
+       class="table table-striped"
+       data-toggle="table"
+       data-pagination="true"
+       data-search="true"
+       data-show-columns="true"
+       data-show-refresh="true"
+       data-filter-control="true">
+    <thead>
+        <tr>
+            <th id="styled-th" class="text-start" data-field="name" data-filter-control="input">Item name</th>
+            <th id="styled-th" class="text-center" data-field="price" data-filter-control="input">Price</th>
+            <th id="styled-th" class="text-center" data-field="availability" data-filter-control="select">Availability</th>
+            <th id="styled-th" class="text-center" data-field="created_at" data-filter-control="datepicker">Date Added</th>
+            <th id="styled-th" class="text-start" data-field="description" data-filter-control="input">Description</th>
+            <th id="styled-th" class="text-center" data-field="image">Image</th>
+            <th id="styled-th" class="text-center" data-field="contact_name" data-filter-control="input">Contact Name</th>
+            <th id="styled-th" class="text-center" data-field="contact_phone">Contact Phone</th>
+            <th id="styled-th" class="text-center" data-field="contact_email">Contact Email</th>
+            <th id="styled-th" class="text-center" data-field="location">Location</th>
+            <th id="styled-th" class="text-center" data-field="sold" data-filter-control="select">Sold?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            <tr class="{% if item.sold != 0 %}strikethrough{% endif %}">
+                <td id="styled-td" class="text-start">{{ item.name }}</td>
+                <td id="styled-td" class="text-center">{{ item.price | currency }} {{ item.currency }}</td>
+                <td id="styled-td" class="text-center">{{ item.availability }}</td>
+                <td id="styled-td" class="text-center">{{ item.created_at.strftime('%d-%m-%Y') }}</td>
+                <td id="styled-td" class="scrollable-container">
+                    <div id="styled-td" class="text-start scrollable-content">
+                      {{ item.description }}
+                    </div>
+                  </td>
+                  <td class="text-center image-cell">
+                    {% if item.thumbnail_path %}
+                        <a href="{{ item.image_path }}" target="_blank" class="thumbnail-link">
+                            <img src="{{ item.thumbnail_path }}" alt="{{ item.name }}" class="thumbnail">
+                        </a>
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td id="styled-td" class="text-center">{{ item.contact.name }}</td>
+                <td id="styled-td" class="text-center">
+                    <a href="tel:{{ item.contact.phone }}">{{ item.contact.phone }}</a>
+                  </td>
+                  <td id="styled-td" class="text-center">
+                    <a href="mailto:{{ item.contact.email }}">{{ item.contact.email }}</a>
+                  </td>
+                  <td id="styled-td" class="text-center">
+                    {% if item.contact.location %}
+                      <a href="https://www.google.com/maps/search/?api=1&query={{ item.contact.location }}" target="_blank">
+                        {{ item.contact.location }}
+                      </a>
+                    {% else %}
+                      {{ item.contact.location }}
+                    {% endif %}
+                  </td>
+                  </td>
+                <td id="styled-td" class="text-center">{{ 'No' if item.sold == 0 else 'Yes' }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {% if items.has_prev %}
+    <a&nbsp;<a href="#"></a><a href="{{ url_for('index', page=items.prev_num, search=search) }}">Previous</a>
+    {% endif %}
+
+    Page {{ items.page }} of {{ items.pages }} &nbsp;<a href="#"></a>
+
+    {% if items.has_next %}
+    <a href="{{ url_for('index', page=items.next_num, search=search) }}">Next</a>
+    {% endif %}
+</div>
+
+{% endblock %}

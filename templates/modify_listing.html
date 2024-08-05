@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block title %}Modify Listings{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h2 class="my-4">Modify Your Listings</h2>
+
+    <form id="modifyListingsForm" method="POST" action="/modify_listing" enctype="multipart/form-data">
+        {% for item in items %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name-{{ item.id }}">Item Name:</label>
+                    <input type="text" class="form-control" id="name-{{ item.id }}" name="name-{{ item.id }}" value="{{ item.name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="description-{{ item.id }}">Description:</label>
+                    <textarea class="form-control" id="description-{{ item.id }}" name="description-{{ item.id }}" rows="3" required>{{ item.description }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price-{{ item.id }}">Price:</label>
+                    <input type="number" class="form-control" id="price-{{ item.id }}" name="price-{{ item.id }}" value="{{ item.price }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="currency-{{ item.id }}">Currency:</label>
+                    <select class="form-control" id="currency-{{ item.id }}" name="currency-{{ item.id }}">
+                        <option value="UGX" {{ 'selected' if item.currency == 'UGX' else '' }}>UGX</option>
+                        <option value="USD" {{ 'selected' if item.currency == 'USD' else '' }}>USD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name-{{ item.id }}">Availability:</label>
+                    <input type="text" class="form-control" id="name-{{ item.id }}" name="name-{{ item.id }}" value="{{ item.availability }}" required>
+                </div>
+
+                <!-- Existing Image Display -->
+                <div class="form-group">
+                    <label for="current-image-{{ item.id }}">Current Image:</label>
+                    <div>
+                        {% if item.image_path %}
+                            <img src="{{ url_for('static', filename=item.image_path) }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </div>
+                </div>
+
+
+
+
+                <!-- New Image Upload Field -->
+                <div class="form-group">
+                    <label for="image-{{ item.id }}">Upload New Image:</label>
+                    <input type="file" class="form-control" id="image-{{ item.id }}" name="image-{{ item.id }}">
+                </div>
+
+                <!-- Remove Image Checkbox -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="remove-image-{{ item.id }}" name="remove-image-{{ item.id }}">
+                    <label class="form-check-label" for="remove-image-{{ item.id }}">Remove Current Image</label>
+                </div>
+
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="sold-{{ item.id }}" name="sold-{{ item.id }}" {{ 'checked' if item.sold else '' }}>
+                    <label class="form-check-label" for="sold-{{ item.id }}">Mark as Sold</label>
+                </div>
+                <button type="button" class="btn btn-danger mt-2" onclick="deleteItem({{ item.id }})">Delete Item</button>
+            </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+
+{% endblock %}
